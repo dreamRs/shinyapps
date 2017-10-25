@@ -199,7 +199,7 @@ function(input, output, session) {
   shiny::onStop(function() {
     rm(list = c("descriptif_application", "genre_lib", "rentree_etab", "siecles_lib", 
                 "summarise_etablissements", "type_etablissement", "type_etablissement_lib"
-    ), envir = environment())
+    ), envir = globalenv())
     shiny::stopApp()
   })
 }
