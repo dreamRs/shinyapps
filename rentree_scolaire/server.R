@@ -196,6 +196,11 @@ function(input, output, session) {
     showModal(descriptif_application())
   })
   
-  shiny::onStop(shiny::stopApp)
+  shiny::onStop(function() {
+    rm(list = c("descriptif_application", "genre_lib", "rentree_etab", "siecles_lib", 
+                "summarise_etablissements", "type_etablissement", "type_etablissement_lib"
+    ), envir = environment())
+    shiny::stopApp()
+  })
 }
 
