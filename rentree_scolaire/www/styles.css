@@ -1,0 +1,70 @@
+body {
+  /*font-family: Georgia, "Times New Roman", Times, serif !important;*/
+  /*font-family: 'Roboto', sans-serif !important;*/
+  font-family: 'Lora', serif  !important;
+  background-color: #112446;
+}
+
+.dreamrs {
+  background-image:url(logo_dreamRs_couleur.png);
+  background-repeat:no-repeat;
+  background-position:right bottom;
+  background-size: 156px 100px;
+}
+
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: #112446;
+}
+
+.btn-dreamrs {
+  background-color: #112446;
+  color: #fff;
+  border-color: #112446;
+}
+
+.btn-dreamrs:hover {
+  color: #fff;
+}
+
+.btn-dreamrs.active {
+  color: #112446;
+  background-color: #fff;
+  border-color: #112446;
+}
+
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary, .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary {
+    color: #fff;
+    background: #112446 !important;
+}
+
+
+.progress-bar-danger {
+  background-color: #fff;
+}
+
+.progress-bar.progress-bar-danger {
+  color: #000;
+}
+
+.progress {
+  background-color: #c9cdd5;
+}
+
+#particles2-js canvas2{
+    position: absolute;
+    width: 95%;
+    height: 100%;
+    z-index: -1;
+}
+
+.container
+{
+  position: absolute;
+  top: 15px;
+  width:90%;
+  max-width: 1400px;
+  min-width: 600px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
