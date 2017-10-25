@@ -1,0 +1,2 @@
+# shinyapps
+Some Shiny applications
