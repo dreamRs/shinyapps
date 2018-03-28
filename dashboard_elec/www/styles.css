@@ -1,0 +1,84 @@
+
+.titre {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size:28px;
+  margin-top: 5px; margin-bottom: 0px;
+  text-align: left;
+  font-weight: normal;
+  color: #222;
+}
+
+.soustitre {
+  font-family: "Lucida Grande", Tahoma;
+  font-size: 14px;
+  font-weight: lighter;
+  font-variant: normal;
+  text-transform: uppercase;
+  color: #666666;
+  margin-top: 10px;
+  text-align: left;
+  letter-spacing: 0.3em;
+}
+
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+
+
+#magnifying-glass
+{
+ font-size: 30em; /* This controls the size. */
+ display: inline-block;
+ width: 0.4em;
+ height: 0.4em;
+ border: 0.1em solid red;
+ position: fixed;
+ top: 10px;
+ left: 10px;
+ border-radius: 0.35em;
+}
+#magnifying-glass::before
+{
+ content: "";
+ display: inline-block;
+ position: absolute;
+ right: -0.25em;
+ bottom: -0.1em;
+ border-width: 0;
+ background: red;
+ width: 0.35em;
+ height: 0.08em;
+ -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+}
+
+
+
+.main-icon {
+  position: absolute; 
+  top: -35px; 
+  right: 15px; 
+  color: #F2F2F2; 
+  font-size: 1100%; 
+  z-index: -1;
+}
+
+
+
+.progress-bar-nuclear {
+  background-color: #f8ca4c;
+}
+.progress-bar-fossil {
+  background-color: #848484;
+}
+.progress-bar-renewable {
+  background-color: #088A08;
+}
+
+
+
+
