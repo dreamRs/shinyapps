@@ -80,5 +80,7 @@ body {
 }
 
 
-
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: #112446;
+}
 

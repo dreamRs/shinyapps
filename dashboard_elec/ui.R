@@ -53,7 +53,8 @@ fluidPage(
           addSpinner(
             plotOutput(outputId = "plot_consumption", height = "450px"),
             spin = "folding-cube"
-          )
+          ),
+          uiOutput(outputId = "gap_consumption")
         ),
         
         verticalTabPanel(
@@ -73,6 +74,11 @@ fluidPage(
           addSpinner(
             plotOutput(outputId = "plot_exchange", height = "450px"),
             spin = "folding-cube"
+          ),
+          materialSwitch(
+            inputId = "by_country", 
+            label = "View by countries", 
+            value = FALSE, right = TRUE
           )
         ),
         

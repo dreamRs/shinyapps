@@ -48,6 +48,29 @@ function(input, output, session) {
   })
   
   
+  output$gap_consumption <- renderUI({
+    req(consumption_r())
+    dat <- consumption_r()
+    dat <- unique(dat, by = c("type", "start_date"))
+    dat2 <- dcast(data = dat, formula = start_date ~ type, value.var = "value")
+    dat2 <- dat2[!is.na(REALISED), list(
+      pred = sum(`D-1`) / 4000, 
+      obs = sum(REALISED) / 4000,
+      ecart = (sum(`D-1`) - sum(REALISED)) / sum(REALISED) * 100
+    )]
+    tags$span(
+      "Overall forecast:", 
+      tags$b(formatC(dat2$pred, big.mark = ", ", digits = 1, format = "f")), 
+      "GWh",
+      "(", HTML(paste0(
+        ifelse(dat2$ecart > 0, "+", ""), 
+        tags$b(formatC(dat2$ecart, digits = 2, format = "f")), 
+        "%"
+      )), " versus real consumption)"
+    )
+  })
+  
+  
   
   # Generation by sector ----
   
@@ -112,7 +135,7 @@ function(input, output, session) {
   
   output$plot_exchange <- renderPlot({
     req(exchange_r())
-    autoplot(exchange_r())
+    autoplot(exchange_r(), by_country = input$by_country)
   })
   
 }
