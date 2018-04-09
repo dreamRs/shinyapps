@@ -16,16 +16,16 @@ verticalTabsetPanel <- function(...) {
     tabs[[1]]$tabbox$attribs$class, "active"
   )
   vtbTag <- tags$div(
-    class="col-lg-12 col-md-5 col-sm-12 col-xs-9 bhoechie-tab-container tabbable",
+    class="col-sm-12 bhoechie-tab-container tabbable",
     tags$div(
-      class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu",
+      class="col-sm-3 bhoechie-tab-menu",
       tags$div(
         class="list-group",
         lapply(X = tabs, FUN = `[[`, "tabbox")
       )
     ),
     tags$div(
-      class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab  tab-content",
+      class="col-sm-9 bhoechie-tab  tab-content",
       lapply(X = tabs, FUN = `[[`, "tabcontent")
     )
   )
