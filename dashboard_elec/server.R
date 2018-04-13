@@ -24,21 +24,29 @@ function(input, output, session) {
   # Consumption Forecast ----
   
   consumption_r <- reactive({
-    res_api <- try(get_consumption(
-      resource = "short_term", 
-      type = c("REALISED", "D-1"), 
-      start_date = input$dates[1],
-      end_date = input$dates[2] + 1
-    ), silent = TRUE)
-    if ("try-error" %in% class(res_api)) {
-      sendSweetAlert(
-        session = session, 
-        title = "API request failed", 
-        text = attr(res_api, "condition")$message, 
-        type = "error"
-      )
+    if ((is.null(input$confirm_consumption) || !input$confirm_consumption)) {
+      res_api <- try(get_consumption(
+        resource = "short_term", 
+        type = c("REALISED", "D-1"), 
+        start_date = input$dates[1],
+        end_date = input$dates[2] + 1
+      ), silent = TRUE)
     } else {
-      res_api
+      res_api <- readRDS(file = "datas/consumption.rds")
+    }
+    if ("try-error" %in% class(res_api)) {
+      confirmSweetAlert(
+        session = session,
+        inputId = "confirm_consumption",
+        type = "error",
+        title = "API request failed", 
+        text = attr(res_api, "condition")$message,
+        btn_labels = c("Retry", "Use backup data"),
+        danger_mode = FALSE
+      )
+      return(NULL)
+    } else {
+      return(res_api)
     }
   })
   
