@@ -77,7 +77,7 @@ fluidPage(
           ),
           materialSwitch(
             inputId = "by_country", 
-            label = "View by countries", 
+            label = "See details by country", 
             value = FALSE, right = TRUE
           )
         ),

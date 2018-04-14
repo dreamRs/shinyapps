@@ -83,20 +83,28 @@ function(input, output, session) {
   # Generation by sector ----
   
   generation_sector_r <- reactive({
-    res_api <- try(get_actual_generation(
-      resource = "actual_generations_per_production_type", 
-      start_date = input$dates[1],
-      end_date = input$dates[2]
-    ), silent = TRUE)
-    if ("try-error" %in% class(res_api)) {
-      sendSweetAlert(
-        session = session, 
-        title = "API request failed", 
-        text = attr(res_api, "condition")$message, 
-        type = "error"
-      )
+    if ((is.null(input$confirm_acgen) || !input$confirm_acgen)) {
+      res_api <- try(get_actual_generation(
+        resource = "actual_generations_per_production_type", 
+        start_date = input$dates[1],
+        end_date = input$dates[2]
+      ), silent = TRUE)
     } else {
-      res_api
+      res_api <- readRDS(file = "datas/acgen.rds")
+    }
+    if ("try-error" %in% class(res_api)) {
+      confirmSweetAlert(
+        session = session,
+        inputId = "confirm_acgen",
+        type = "error",
+        title = "API request failed", 
+        text = attr(res_api, "condition")$message,
+        btn_labels = c("Retry", "Use backup data"),
+        danger_mode = FALSE
+      )
+      return(NULL)
+    } else {
+      return(res_api)
     }
   })
   
@@ -124,19 +132,27 @@ function(input, output, session) {
   # Exchange ----
   
   exchange_r <- reactive({
-    res_api <- try(get_physical_flows(
-      start_date = input$dates[1],
-      end_date = input$dates[2]
-    ), silent = TRUE)
-    if ("try-error" %in% class(res_api)) {
-      sendSweetAlert(
-        session = session, 
-        title = "API request failed", 
-        text = attr(res_api, "condition")$message, 
-        type = "error"
-      )
+    if ((is.null(input$confirm_phyflow) || !input$confirm_phyflow)) {
+      res_api <- try(get_physical_flows(
+        start_date = input$dates[1],
+        end_date = input$dates[2]
+      ), silent = TRUE)
     } else {
-      res_api
+      res_api <- readRDS(file = "datas/phyflow.rds")
+    }
+    if ("try-error" %in% class(res_api)) {
+      confirmSweetAlert(
+        session = session,
+        inputId = "confirm_phyflow",
+        type = "error",
+        title = "API request failed", 
+        text = attr(res_api, "condition")$message,
+        btn_labels = c("Retry", "Use backup data"),
+        danger_mode = FALSE
+      )
+      return(NULL)
+    } else {
+      return(res_api)
     }
   })
   
