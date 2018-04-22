@@ -33,6 +33,9 @@ library( shinyWidgets )
 # https://bit.ly/2JDSYNp
 # set_key(api = "actual_generation", key = "BASE64_KEY==")
 
+# https://bit.ly/2qOgCiG
+# set_key(api = "generation_installed_capacities", key = "BASE64_KEY==")
+
 
 
 # Funs --------------------------------------------------------------------

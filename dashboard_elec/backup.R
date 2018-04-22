@@ -58,3 +58,22 @@ phyflow <- get_physical_flows(
 saveRDS(phyflow, file = "dashboard_elec/datas/phyflow.rds")
 
 
+
+# Active units ------------------------------------------------------------
+
+active_units <- get_physical_flows(
+  start_date = start,
+  end_date = end
+)
+saveRDS(active_units, file = "dashboard_elec/datas/active_units.rds")
+
+
+
+# Installed capacities ----------------------------------------------------
+
+inst_cap <- get_open_api(
+  api = "generation_installed_capacities",
+  resource = "capacities_per_production_unit"
+)
+saveRDS(inst_cap, file = "dashboard_elec/datas/inst_cap.rds")
+

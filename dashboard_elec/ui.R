@@ -84,7 +84,21 @@ fluidPage(
         
         verticalTabPanel(
           title = "Generation capacities", icon = icon("industry", class = "fa-2x"),
-          tags$p("% Generation capacities")
+          radioGroupButtons(
+            inputId = "capacities_plot", 
+            label = "Active production units", 
+            choiceNames = list(
+              tags$span(icon("percent"), "Summary"),
+              tags$span(icon("map"), "Map"), 
+              tags$span(icon("industry"), "Global")
+            ),
+            choiceValues = c("summary", "map", "global"),
+            status = "dreamrs", justified = TRUE, selected = "summary"
+          ),
+          addSpinner(
+            plotOutput(outputId = "plot_generation_capacities", height = "520px"),
+            spin = "folding-cube"
+          )
         )
         
       )

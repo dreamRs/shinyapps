@@ -162,4 +162,68 @@ function(input, output, session) {
     autoplot(exchange_r(), by_country = input$by_country)
   })
   
+  
+  # Active units ----
+  
+  active_units_r <- reactive({
+    if ((is.null(input$confirm_active) || !input$confirm_active)) {
+      res_api <- try(retrieve_active_units(
+        start_date = input$dates[1],
+        end_date = input$dates[2]
+      ), silent = TRUE)
+    } else {
+      res_api <- readRDS(file = "datas/active_units.rds")
+    }
+    if ("try-error" %in% class(res_api)) {
+      confirmSweetAlert(
+        session = session,
+        inputId = "confirm_active",
+        type = "error",
+        title = "API request failed", 
+        text = attr(res_api, "condition")$message,
+        btn_labels = c("Retry", "Use backup data"),
+        danger_mode = FALSE
+      )
+      return(NULL)
+    } else {
+      return(res_api)
+    }
+  })
+  
+  installed_capacities_r <- reactive({
+    if ((is.null(input$confirm_installed) || !input$confirm_installed)) {
+      res_api <- try(get_open_api(
+        api = "generation_installed_capacities",
+        resource = "capacities_per_production_unit"
+      ), silent = TRUE)
+    } else {
+      res_api <- readRDS(file = "datas/inst_cap.rds")
+    }
+    if ("try-error" %in% class(res_api)) {
+      confirmSweetAlert(
+        session = session,
+        inputId = "confirm_installed",
+        type = "error",
+        title = "API request failed", 
+        text = attr(res_api, "condition")$message,
+        btn_labels = c("Retry", "Use backup data"),
+        danger_mode = FALSE
+      )
+      return(NULL)
+    } else {
+      return(res_api)
+    }
+  })
+  
+  output$plot_generation_capacities <- renderPlot({
+    if (input$capacities_plot == "summary") {
+      req(active_units_r())
+      autoplot(active_units_r())
+    } else if (input$capacities_plot == "global") {
+      req(installed_capacities_r())
+      autoplot(installed_capacities_r())
+    }
+  })
+  
+  
 }

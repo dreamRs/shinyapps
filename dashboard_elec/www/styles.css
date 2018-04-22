@@ -84,3 +84,20 @@ body {
     background: #112446;
 }
 
+
+.btn-dreamrs {
+  background-color: #112446;
+  color: #fff;
+  border-color: #112446;
+}
+
+.btn-dreamrs:hover {
+  color: #fff;
+}
+
+.btn-dreamrs.active {
+  color: #112446;
+  background-color: #fff;
+  border-color: #112446;
+}
+
