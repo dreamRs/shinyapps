@@ -56,3 +56,11 @@ sector_list <- list(
   nuclear = c("NUCLEAR")
 )
 
+
+# session_info ------------------------------------------------------------
+
+# sink("dashboard_elec/session_info.txt")
+# devtools::session_info()
+# sink()
+
+
