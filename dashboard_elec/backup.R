@@ -61,7 +61,7 @@ saveRDS(phyflow, file = "dashboard_elec/datas/phyflow.rds")
 
 # Active units ------------------------------------------------------------
 
-active_units <- get_physical_flows(
+active_units <- retrieve_active_units(
   start_date = start,
   end_date = end
 )
