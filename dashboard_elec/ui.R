@@ -51,7 +51,7 @@ fluidPage(
         verticalTabPanel(
           title = "Forecast", icon = icon("line-chart", class = "fa-2x"),
           addSpinner(
-            plotOutput(outputId = "plot_consumption", height = "450px"),
+            billboarderOutput(outputId = "plot_consumption", height = "520px"),
             spin = "folding-cube"
           ),
           uiOutput(outputId = "gap_consumption")
@@ -60,7 +60,7 @@ fluidPage(
         verticalTabPanel(
           title = "Generation by sector", icon = icon("gears", class = "fa-2x"),
           addSpinner(
-            plotOutput(outputId = "plot_generation_sector", height = "440px"),
+            billboarderOutput(outputId = "plot_generation_sector", height = "430px"),
             spin = "folding-cube"
           ),
           tags$p("% of main sectors:"),
@@ -72,7 +72,7 @@ fluidPage(
         verticalTabPanel(
           title = "Exchange", icon = icon("exchange", class = "fa-2x"),
           addSpinner(
-            plotOutput(outputId = "plot_exchange", height = "450px"),
+            billboarderOutput(outputId = "plot_exchange", height = "450px"),
             spin = "folding-cube"
           ),
           materialSwitch(
@@ -95,10 +95,27 @@ fluidPage(
             choiceValues = c("summary", "map", "global"),
             status = "dreamrs", justified = TRUE, selected = "summary"
           ),
-          addSpinner(
-            plotOutput(outputId = "plot_generation_capacities", height = "520px"),
-            spin = "folding-cube"
+          conditionalPanel(
+            condition = "input.capacities_plot == 'summary'",
+            addSpinner(
+              billboarderOutput(outputId = "plot_active_units_p", height = "520px"),
+              spin = "folding-cube"
+            )
+          ),
+          conditionalPanel(
+            condition = "input.capacities_plot != 'summary'",
+            addSpinner(
+              leafletOutput(outputId = "map_capacities", height = "520px"),
+              spin = "folding-cube"
+            )
           )
+          # conditionalPanel(
+          #   condition = "input.capacities_plot == 'global'",
+          #   # addSpinner(
+          #     leafletOutput(outputId = "map_capacities", height = "520px")#,
+          #     # spin = "folding-cube"
+          #   # )
+          # )
         )
         
       )

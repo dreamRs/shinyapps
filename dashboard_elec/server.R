@@ -50,9 +50,11 @@ function(input, output, session) {
     }
   })
   
-  output$plot_consumption <- renderPlot({
+  output$plot_consumption <- renderBillboarder({
     req(consumption_r())
-    autoplot(consumption_r())
+    autoplot(consumption_r(), interactive = TRUE) %>% 
+      bb_svg(classname = "plot-spin") %>%
+      bb_line(classes = list("bb-line-forecast", "bb-line-observed"))
   })
   
   
@@ -108,7 +110,7 @@ function(input, output, session) {
     }
   })
   
-  output$plot_generation_sector <- renderPlot({
+  output$plot_generation_sector <- renderBillboarder({
     req(generation_sector_r())
     dat <- generation_sector_r()
     
@@ -124,7 +126,8 @@ function(input, output, session) {
     updateProgressBar(session = session, id = "pb_fossil", value = sector_prod[sector == "fossil", c(p)])
     updateProgressBar(session = session, id = "pb_renewable", value = sector_prod[sector == "renewable", c(p)])
     
-    autoplot(generation_sector_r())
+    autoplot(generation_sector_r(), interactive = TRUE) %>% 
+      bb_svg(classname = "plot-spin")
   })
   
   
@@ -157,9 +160,10 @@ function(input, output, session) {
   })
   
   
-  output$plot_exchange <- renderPlot({
+  output$plot_exchange <- renderBillboarder({
     req(exchange_r())
-    autoplot(exchange_r(), by_country = input$by_country)
+    autoplot(exchange_r(), by_country = input$by_country, interactive = TRUE) %>% 
+      bb_svg(classname = "plot-spin")
   })
   
   
@@ -215,15 +219,20 @@ function(input, output, session) {
     }
   })
   
-  output$plot_generation_capacities <- renderPlot({
-    if (input$capacities_plot == "summary") {
-      req(active_units_r())
-      autoplot(active_units_r())
-    } else if (input$capacities_plot == "global") {
-      req(installed_capacities_r())
-      autoplot(installed_capacities_r())
-    }
+  output$plot_active_units_p <- renderBillboarder({
+    req(active_units_r())
+    autoplot(active_units_r(), interactive = TRUE) %>% 
+      bb_svg(classname = "plot-spin")
   })
   
-  
+  output$map_capacities <- renderLeaflet({
+    if (input$capacities_plot == 'map') {
+      req(active_units_r())
+      autoplot(active_units_r(), interactive = TRUE, map = TRUE)
+    } else if (input$capacities_plot == 'global') {
+      req(installed_capacities_r())
+      autoplot(installed_capacities_r(), interactive = TRUE)
+    }
+  })
+
 }

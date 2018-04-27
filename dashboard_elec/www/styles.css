@@ -101,3 +101,17 @@ body {
   border-color: #112446;
 }
 
+
+/* Charts */
+
+.plot-spin {
+  background: #FFFFFF;
+}
+
+.bb-line-forecast {
+  stroke-width: 2px;
+}
+
+.bb-line-observed {
+  stroke-dasharray: 12 4; stroke-width: 2px;
+}
