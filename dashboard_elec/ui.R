@@ -109,15 +109,14 @@ fluidPage(
               spin = "folding-cube"
             )
           )
-          # conditionalPanel(
-          #   condition = "input.capacities_plot == 'global'",
-          #   # addSpinner(
-          #     leafletOutput(outputId = "map_capacities", height = "520px")#,
-          #     # spin = "folding-cube"
-          #   # )
-          # )
         )
         
+      ),
+      br(),
+      actionLink(
+        inputId = "about", label = "about the application", icon = NULL,
+        tags$img(src = "logo_dreamRs_couleur.png", style = "width: 50px; float:left; margin-right: 10px;"),
+        style = "color: #112446; padding: 5px; line-height:25px;", class = "pull-right"
       )
       
     )

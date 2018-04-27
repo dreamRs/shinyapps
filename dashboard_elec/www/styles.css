@@ -67,6 +67,12 @@ body {
   z-index: -1;
 }
 
+.dreamrs {
+  background-image:url(logo_dreamRs_couleur.png);
+  background-repeat:no-repeat;
+  background-position:right bottom;
+  background-size: 156px 100px;
+}
 
 
 .progress-bar-nuclear {

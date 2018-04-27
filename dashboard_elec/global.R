@@ -44,7 +44,7 @@ library( leaflet )
 
 source("funs/vertical-tab-panel.R")
 source("funs/addSpinner.R")
-
+source("funs/descriptif_application.R")
 
 
 # Misc --------------------------------------------------------------------

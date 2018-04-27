@@ -235,4 +235,10 @@ function(input, output, session) {
     }
   })
 
+  
+  # About the app ----
+  observeEvent(input$about, {
+    showModal(descriptif_application())
+  })
+  
 }
