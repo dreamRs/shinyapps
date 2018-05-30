@@ -20,6 +20,11 @@ library( shiny )
 
 function(input, output, session) {
   
+  # Tokens list
+  tokens <- list(
+    
+  )
+  
   
   # Consumption Forecast ----
   
@@ -29,7 +34,8 @@ function(input, output, session) {
         resource = "short_term", 
         type = c("REALISED", "D-1"), 
         start_date = input$dates[1],
-        end_date = input$dates[2] + 1
+        end_date = input$dates[2] + 1,
+        token = tokens$consumption
       ), silent = TRUE)
     } else {
       res_api <- readRDS(file = "datas/consumption.rds")
@@ -89,7 +95,8 @@ function(input, output, session) {
       res_api <- try(get_actual_generation(
         resource = "actual_generations_per_production_type", 
         start_date = input$dates[1],
-        end_date = input$dates[2]
+        end_date = input$dates[2], 
+        token = tokens$actual_generation
       ), silent = TRUE)
     } else {
       res_api <- readRDS(file = "datas/acgen.rds")
@@ -138,7 +145,8 @@ function(input, output, session) {
     if ((is.null(input$confirm_phyflow) || !input$confirm_phyflow)) {
       res_api <- try(get_physical_flows(
         start_date = input$dates[1],
-        end_date = input$dates[2]
+        end_date = input$dates[2], 
+        token = tokens$physical_flow
       ), silent = TRUE)
     } else {
       res_api <- readRDS(file = "datas/phyflow.rds")
@@ -173,7 +181,8 @@ function(input, output, session) {
     if ((is.null(input$confirm_active) || !input$confirm_active)) {
       res_api <- try(retrieve_active_units(
         start_date = input$dates[1],
-        end_date = input$dates[2]
+        end_date = input$dates[2],
+        tokens = tokens
       ), silent = TRUE)
     } else {
       res_api <- readRDS(file = "datas/active_units.rds")
@@ -198,7 +207,8 @@ function(input, output, session) {
     if ((is.null(input$confirm_installed) || !input$confirm_installed)) {
       res_api <- try(get_open_api(
         api = "generation_installed_capacities",
-        resource = "capacities_per_production_unit"
+        resource = "capacities_per_production_unit", 
+        token = tokens$generation_installed_capacities
       ), silent = TRUE)
     } else {
       res_api <- readRDS(file = "datas/inst_cap.rds")
