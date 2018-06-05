@@ -28,8 +28,19 @@ function(input, output, session) {
   
   # Consumption Forecast ----
   
+  confirm_consumption <- reactiveValues(x = TRUE, time = Sys.time())
+  observeEvent(input$confirm_consumption, {
+    confirm_consumption$x <- (is.null(input$confirm_consumption) || !input$confirm_consumption)
+    confirm_consumption$time <- Sys.time()
+  }, ignoreNULL = TRUE)
+  observeEvent(input$refresh, {
+    confirm_consumption$x <- TRUE
+    confirm_consumption$time <- Sys.time()
+  })
+  
   consumption_r <- reactive({
-    if ((is.null(input$confirm_consumption) || !input$confirm_consumption)) {
+    confirm_consumption$time
+    if (confirm_consumption$x) {
       res_api <- try(get_consumption(
         resource = "short_term", 
         type = c("REALISED", "D-1"), 
@@ -90,8 +101,19 @@ function(input, output, session) {
   
   # Generation by sector ----
   
+  confirm_acgen <- reactiveValues(x = TRUE, time = Sys.time())
+  observeEvent(input$confirm_acgen, {
+    confirm_acgen$x <- (is.null(input$confirm_acgen) || !input$confirm_acgen)
+    confirm_acgen$time <- Sys.time()
+  }, ignoreNULL = TRUE)
+  observeEvent(input$refresh, {
+    confirm_acgen$x <- TRUE
+    confirm_acgen$time <- Sys.time()
+  })
+  
   generation_sector_r <- reactive({
-    if ((is.null(input$confirm_acgen) || !input$confirm_acgen)) {
+    confirm_acgen$time
+    if (confirm_acgen$x) {
       res_api <- try(get_actual_generation(
         resource = "actual_generations_per_production_type", 
         start_date = input$dates[1],
@@ -134,15 +156,27 @@ function(input, output, session) {
     updateProgressBar(session = session, id = "pb_renewable", value = sector_prod[sector == "renewable", c(p)])
     
     autoplot(generation_sector_r(), interactive = TRUE) %>% 
-      bb_svg(classname = "plot-spin")
+      bb_svg(classname = "plot-spin") %>% 
+      bb_labs(title = "")
   })
   
   
   
   # Exchange ----
   
+  confirm_phyflow <- reactiveValues(x = TRUE, time = Sys.time())
+  observeEvent(input$confirm_phyflow, {
+    confirm_phyflow$x <- (is.null(input$confirm_phyflow) || !input$confirm_phyflow)
+    confirm_phyflow$time <- Sys.time()
+  }, ignoreNULL = TRUE)
+  observeEvent(input$refresh, {
+    confirm_phyflow$x <- TRUE
+    confirm_phyflow$time <- Sys.time()
+  })
+  
   exchange_r <- reactive({
-    if ((is.null(input$confirm_phyflow) || !input$confirm_phyflow)) {
+    confirm_phyflow$time
+    if (confirm_phyflow$x) {
       res_api <- try(get_physical_flows(
         start_date = input$dates[1],
         end_date = input$dates[2], 
@@ -177,8 +211,19 @@ function(input, output, session) {
   
   # Active units ----
   
+  confirm_active <- reactiveValues(x = TRUE, time = Sys.time())
+  observeEvent(input$confirm_active, {
+    confirm_active$x <- (is.null(input$confirm_active) || !input$confirm_active)
+    confirm_active$time <- Sys.time()
+  }, ignoreNULL = TRUE)
+  observeEvent(input$refresh, {
+    confirm_active$x <- TRUE
+    confirm_active$time <- Sys.time()
+  })
+  
   active_units_r <- reactive({
-    if ((is.null(input$confirm_active) || !input$confirm_active)) {
+    confirm_active$time
+    if (confirm_active$x) {
       res_api <- try(retrieve_active_units(
         start_date = input$dates[1],
         end_date = input$dates[2],
@@ -203,8 +248,20 @@ function(input, output, session) {
     }
   })
   
+  
+  confirm_installed <- reactiveValues(x = TRUE, time = Sys.time())
+  observeEvent(input$confirm_installed, {
+    confirm_installed$x <- (is.null(input$confirm_installed) || !input$confirm_installed)
+    confirm_installed$time <- Sys.time()
+  }, ignoreNULL = TRUE)
+  observeEvent(input$refresh, {
+    confirm_installed$x <- TRUE
+    confirm_installed$time <- Sys.time()
+  })
+  
   installed_capacities_r <- reactive({
-    if ((is.null(input$confirm_installed) || !input$confirm_installed)) {
+    confirm_installed$time
+    if (confirm_installed$x) {
       res_api <- try(get_open_api(
         api = "generation_installed_capacities",
         resource = "capacities_per_production_unit", 

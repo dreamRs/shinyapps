@@ -40,12 +40,25 @@ fluidPage(
         tags$span(icon("bolt"), class = "main-icon")
       ),
       
-      dateRangeInput(
-        inputId = "dates", label = NULL, 
-        start = Sys.Date() - 7, end = Sys.Date(),
-        min = Sys.Date() - 45, max = Sys.Date()
+      tags$div(
+        style = "width: 100%; overflow: hidden;",
+        tags$div(
+          style = "width: 300px; float: left;",
+          dateRangeInput(
+            inputId = "dates", label = NULL, 
+            start = Sys.Date() - 7, end = Sys.Date(),
+            min = Sys.Date() - 45, max = Sys.Date(), width = "300px"
+          )
+        ),
+        tags$div(
+          style = "margin-left: 320px;",
+          actionButton(
+            inputId = "refresh", label = NULL, icon = icon("refresh"),
+            style = "height: 30px; padding: 0px 12px;"
+          )
+        )
       ),
-      
+
       verticalTabsetPanel(
         
         verticalTabPanel(
@@ -59,14 +72,16 @@ fluidPage(
         
         verticalTabPanel(
           title = "Generation by sector", icon = icon("gears", class = "fa-2x"),
+          tags$b("% of main sectors:"),
+          progressBar(id = "pb_nuclear", value = 0, display_pct = TRUE, title = "Nuclear", status = "nuclear"),
+          progressBar(id = "pb_fossil", value = 0, display_pct = TRUE, title = "Fossil", status = "fossil"),
+          progressBar(id = "pb_renewable", value = 0, display_pct = TRUE, title = "Renewable", status = "renewable"),
+          tags$br(), 
+          tags$b("Details by sectors:"),
           addSpinner(
             billboarderOutput(outputId = "plot_generation_sector", height = "430px"),
             spin = "folding-cube"
-          ),
-          tags$p("% of main sectors:"),
-          progressBar(id = "pb_nuclear", value = 0, display_pct = TRUE, title = "Nuclear", status = "nuclear"),
-          progressBar(id = "pb_fossil", value = 0, display_pct = TRUE, title = "Fossil", status = "fossil"),
-          progressBar(id = "pb_renewable", value = 0, display_pct = TRUE, title = "Renewable", status = "renewable")
+          )
         ),
         
         verticalTabPanel(
