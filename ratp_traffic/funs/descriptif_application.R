@@ -32,7 +32,7 @@ descriptif_application <- function() {
               ": pour rechercher un endroit sur la carte"),
       tags$li(tags$a("dplyr", href = "https://github.com/tidyverse/dplyr"),
               ": pour manipuler les donn\u00e9es"),
-      tags$li(tags$a("highcharter", href = "https://github.com/highcharts/highcharts"), 
+      tags$li(tags$a("billboarder", href = "https://github.com/dreamRs/billboarder"), 
               ": pour les graphiques du profil de fr\u00e9quentation horaire"),
       tags$li(tags$a("stringr", href = "https://github.com/tidyverse/stringr"),
               ": pour les cha\u00eenes de caract\u00e8res"),

@@ -36,4 +36,30 @@ shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "dashboard_elec")
 ```
 ![](dashboard_elec/www/screenshot1.png)
 
+## RATP Traffic
 
+
+Explore Paris metro traffic ; how it can vary according to the type of day or according to the line or the station.
+Also, discover the different characteristics of each line.
+
+**Packages** : The application use the following packages : 
+[`shiny`](https://shiny.rstudio.com/), [`shinyWidgets`](https://github.com/dreamRs/shinyWidgets), 
+[`shinythemes`]("https://rstudio.github.io/shinythemes/"), [`shinydashboard`]("https://rstudio.github.io/shinydashboard/"),
+[`dplyr`]("https://github.com/tidyverse/dplyr"),
+[`leaflet`](https://rstudio.github.io/leaflet/), [`leaflet.extras`]("https://github.com/bhaskarvk/leaflet.extras"),
+[`scales`]("https://github.com/r-lib/scales"),
+[`billboarder`](https://github.com/dreamRs/billboarder), 
+[`stringr`]("https://github.com/tidyverse/stringr")
+
+
+
+**Data sources** : The data is recovered via the STIF Open data website : ("https://opendata.stif.info/")
+
+
+
+Launch application : 
+
+```r
+shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "ratp_traffic")
+```
+![](ratp_traffic/www/screenshot_app.png)
