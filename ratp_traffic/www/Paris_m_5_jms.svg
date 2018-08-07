@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">
+
+<circle cx="100" cy="100" r="100" fill="#FF7E2E"/>
+
+<path id="5" fill="#000000" d="M100,100 m 33.42 17.02 c 0 -15.50 -11.39 -31.14 -39.64 -32.61 l -2.95 -0.14 l 1.45 -19.76 l 37.2 0 l 0 -17.14 l -54.31 0 l -4.11 53.72 16.1 0.14 c 19.04 0.19 23.98 10.4 23.98 17.87 c 0 12.12 -10.07 16.7 -18.11 16.7 c -8.81 0 -14.63 -3.24 -19.62 -6.61 l -7.59 16.13 c 8.01 4.52 17.41 7.47 28.37 7.47 c 23.55 0 39.22 -16 39.22 -35.75"/>
+</svg>
