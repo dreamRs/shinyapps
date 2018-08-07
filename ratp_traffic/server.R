@@ -38,6 +38,7 @@ function(input, output) {
   # valueBox 1 - bigger_station -------------------------------------------------
   
   output$bigger_station<- renderValueBox({
+    req(input$choix_ligne)
     if(input$choix_ligne == "ALL"){
       titre <- NVALDTOT_STAT_CATJOUR_LIGNE %>% 
         filter(CAT_JOUR2 %in% c(input$type_jour))
@@ -233,7 +234,7 @@ function(input, output) {
                text = paste("Temps de marche moyen entre 2 arr\u00eats : ", info_ligne$tps_marche_2_arret[info_ligne$LIGNE == input$choix_ligne], " minutes")
           ),
           list(icon = "subway", col = colligne(),
-               text = paste("Metro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
+               text = paste("M\u00e9tro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
           ),
           list(icon = "subway", col = colligne(),  
                text = paste(info_ligne$nb_rames[info_ligne$LIGNE == input$choix_ligne], "rames de m\u00e9tro")
@@ -253,7 +254,7 @@ function(input, output) {
                text = paste(info_ligne$n_station[info_ligne$LIGNE == input$choix_ligne], " stations")
           ),
           list(icon = "subway", col = colligne(),
-               text = paste("Métro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
+               text = paste("M\u00e9tro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
           ),
           list(icon = "calendar-o", col = colligne(),
                text = paste("Ouverture de la ligne en ", info_ligne$annee_ouv[info_ligne$LIGNE == input$choix_ligne])
