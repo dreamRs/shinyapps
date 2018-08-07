@@ -46,6 +46,7 @@ function(input, output) {
   # valueBox 1 - bigger_station -------------------------------------------------
   
   output$bigger_station<- renderValueBox({
+    req(input$choix_ligne)
     if(input$choix_ligne == "ALL"){
       titre <- NVALDTOT_STAT_CATJOUR_LIGNE %>% 
         filter(CAT_JOUR2 %in% type_jour_r$x)

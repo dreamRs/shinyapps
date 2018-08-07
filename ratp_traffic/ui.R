@@ -41,12 +41,12 @@ navbarPage(
                   choices = c("ALL",levels(lignes_metro$LIGNE)),
                   choicesOpt = list(
                     content = c(
-                      sprintf("<img src=\'logo_blanc_ratp.png\' width=20 style=\'vertical-align:top;\'></img> - Choisis une ligne : "), 
+                      sprintf("<img src=\'logo_blanc_ratp.png\' width=20 style=\'vertical-align:top;\'></img> - Choisissez une ligne : "), 
                       sprintf("<img src=\'Paris_m_%s_jms.svg\' width=20 style=\'vertical-align:top;\'></img> Ligne %s",
                               metrolines, metrolines)
                     )
                   ), 
-                  selected = "Choisis une ligne"
+                  selected = "Choisissez une ligne"
                 )
             ),
             
