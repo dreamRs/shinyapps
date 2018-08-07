@@ -57,8 +57,8 @@ navbarPage(
                   label = NULL,
                   width = NULL, 
                   status = "success",
-                  choices = c("vacances","weekend","Jour ouvre"),
-                  selected = c("Jour ouvre","weekend","vacances"),
+                  choices = list("Vacances" = "vacances", "Week-end" = "weekend", "Jour ouvr\u00e9" = "Jour ouvre"),
+                  selected = c("Jour ouvre", "weekend", "vacances"),
                   inline = TRUE
                 )
             )

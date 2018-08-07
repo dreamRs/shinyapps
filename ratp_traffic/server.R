@@ -253,7 +253,7 @@ function(input, output) {
                text = paste(info_ligne$n_station[info_ligne$LIGNE == input$choix_ligne], " stations")
           ),
           list(icon = "subway", col = colligne(),
-               text = paste("Metro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
+               text = paste("Métro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
           ),
           list(icon = "calendar-o", col = colligne(),
                text = paste("Ouverture de la ligne en ", info_ligne$annee_ouv[info_ligne$LIGNE == input$choix_ligne])
