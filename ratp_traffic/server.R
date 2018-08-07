@@ -11,13 +11,21 @@
 
 function(input, output) {
   
+  type_jour_r <- reactiveValues(x = c("Jour ouvre", "weekend", "vacances"))
+  observeEvent(input$type_jour, {
+    if (is.null(input$type_jour)) {
+      type_jour_r$x <- c("Jour ouvre", "weekend", "vacances")
+    } else {
+      type_jour_r$x <- input$type_jour
+    }
+  }, ignoreNULL = FALSE)
   
   
   # reactive fct for n_validation value_box  ------------------------------------------------------------------
   
   nvald_lign_catj <- reactive({
     ss_tbl <- NVALDTOT_STAT_CATJOUR_LIGNE %>%
-      filter(LIGNE == input$choix_ligne & CAT_JOUR2 %in% c(input$type_jour)) %>%
+      filter(LIGNE == input$choix_ligne & CAT_JOUR2 %in% type_jour_r$x) %>%
       select(NB_VALD_STAT_CATJ_2017)
     return(ss_tbl)
   })
@@ -27,7 +35,7 @@ function(input, output) {
   # reactive fct for indic_validation value_box nvald_lign_jour_catj pour value_box   ------------------------------------------------------------------
   nvald_lign_jour_catj <- reactive({
     vald_ligne <- validation_ligne %>% 
-      filter(LIGNE == input$choix_ligne & CAT_JOUR2 %in% c(input$type_jour)) %>% 
+      filter(LIGNE == input$choix_ligne & CAT_JOUR2 %in% type_jour_r$x) %>% 
       select(NB_VALD)
     return(vald_ligne)
   })
@@ -40,10 +48,10 @@ function(input, output) {
   output$bigger_station<- renderValueBox({
     if(input$choix_ligne == "ALL"){
       titre <- NVALDTOT_STAT_CATJOUR_LIGNE %>% 
-        filter(CAT_JOUR2 %in% c(input$type_jour))
+        filter(CAT_JOUR2 %in% type_jour_r$x)
     } else {
       titre <- NVALDTOT_STAT_CATJOUR_LIGNE %>% 
-        filter(LIGNE == input$choix_ligne & CAT_JOUR2 %in% c(input$type_jour))
+        filter(LIGNE == input$choix_ligne & CAT_JOUR2 %in% type_jour_r$x)
     }
     titre %>% 
       filter(NB_VALD_STAT_CATJ_2017 == max(NB_VALD_STAT_CATJ_2017)) %>% 
@@ -64,7 +72,7 @@ function(input, output) {
   output$n_validation <- renderValueBox({
     nvald_lign_jour <- nvald_lign_catj()
     if(input$choix_ligne == "ALL"){
-      titre <- format(sum(validation$NB_VALD[validation$CAT_JOUR2 %in% c(input$type_jour)]), 
+      titre <- format(sum(validation$NB_VALD[validation$CAT_JOUR2 %in% type_jour_r$x]), 
                       big.mark = " ", 
                       scientific = FALSE)
     } else {
@@ -86,7 +94,7 @@ function(input, output) {
   output$indic_validation <- renderValueBox({
     vald_ligne <- nvald_lign_jour_catj()
     if(input$choix_ligne == "ALL"){
-      titre <- format(round(mean(validation$NB_VALD[validation$CAT_JOUR2 %in% c(input$type_jour)]), 0), 
+      titre <- format(round(mean(validation$NB_VALD[validation$CAT_JOUR2 %in% type_jour_r$x]), 0), 
                       big.mark = " ", 
                       scientific = FALSE)
     } else {
@@ -107,7 +115,7 @@ function(input, output) {
   output$indic_validation2 <- renderValueBox({
     vald_ligne <- nvald_lign_jour_catj()
     if(input$choix_ligne == "ALL"){
-      titre <- format(round(mean(validation$NB_VALD[validation$CAT_JOUR2 %in% c(input$type_jour)])/1440,0), 
+      titre <- format(round(mean(validation$NB_VALD[validation$CAT_JOUR2 %in% type_jour_r$x])/1440,0), 
                       big.mark = " ", 
                       scientific = FALSE)
     } else {
@@ -129,7 +137,7 @@ function(input, output) {
   output$carte <- renderLeaflet({
     if(input$choix_ligne == "ALL") {
       NVALDTOT_STAT_CATJOUR_LIGNE %>% 
-        filter(CAT_JOUR2 %in% c(input$type_jour)) %>%
+        filter(CAT_JOUR2 %in% type_jour_r$x) %>%
         group_by(ID_ARRET, NOM_ARRET, LIGNE, stop_lat, stop_lon, Code_hexa) %>% 
         summarise(NB_VALD_STAT_CATJ_2017 = sum(NB_VALD_STAT_CATJ_2017)) %>% 
         as.data.frame() %>% 
@@ -163,7 +171,7 @@ function(input, output) {
     } else {
       NVALDTOT_STAT_CATJOUR_LIGNE %>% 
         filter(LIGNE == input$choix_ligne & 
-                 CAT_JOUR2 %in% c(input$type_jour)) %>%
+                 CAT_JOUR2 %in% type_jour_r$x) %>%
         group_by(ID_ARRET, NOM_ARRET, LIGNE, stop_lat, stop_lon, Code_hexa) %>% 
         summarise(NB_VALD_STAT_CATJ_2017 = sum(NB_VALD_STAT_CATJ_2017)) %>% 
         as.data.frame() %>% 
@@ -233,7 +241,7 @@ function(input, output) {
                text = paste("Temps de marche moyen entre 2 arr\u00eats : ", info_ligne$tps_marche_2_arret[info_ligne$LIGNE == input$choix_ligne], " minutes")
           ),
           list(icon = "subway", col = colligne(),
-               text = paste("Metro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
+               text = paste("M\u00e9tro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
           ),
           list(icon = "subway", col = colligne(),  
                text = paste(info_ligne$nb_rames[info_ligne$LIGNE == input$choix_ligne], "rames de m\u00e9tro")
@@ -253,7 +261,7 @@ function(input, output) {
                text = paste(info_ligne$n_station[info_ligne$LIGNE == input$choix_ligne], " stations")
           ),
           list(icon = "subway", col = colligne(),
-               text = paste("Métro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
+               text = paste("M\u00e9tro automatique : ", info_ligne$auto[info_ligne$LIGNE == input$choix_ligne])
           ),
           list(icon = "calendar-o", col = colligne(),
                text = paste("Ouverture de la ligne en ", info_ligne$annee_ouv[info_ligne$LIGNE == input$choix_ligne])
