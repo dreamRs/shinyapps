@@ -20,7 +20,7 @@ library( shiny )
 
 
 fluidPage(
-  
+
   tags$head(
     tags$link(href="styles.css", rel="stylesheet", type="text/css")
   ),

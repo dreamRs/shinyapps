@@ -42,7 +42,6 @@ library( leaflet )
 
 # Funs --------------------------------------------------------------------
 
-source("funs/vertical-tab-panel.R")
 source("funs/descriptif_application.R")
 
 
