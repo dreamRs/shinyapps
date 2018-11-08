@@ -23,9 +23,13 @@ gh_infos <- function(user) {
     X = user_repo$name,
     FUN = function(x) {
       dat <- gh("/repos/:owner/:repo/traffic/views", owner = user, repo = x, .limit = Inf)
-      dat <- rbindlist(dat$views)
-      dat$repo <- x
-      dat
+      if (length(dat$views) == 0) {
+        return(NULL)
+      } else {
+        dat <- rbindlist(dat$views)
+        dat$repo <- x
+        dat
+      }
     }
   ), silent = TRUE)
   if ("try-error" %in% class(user_views)) {
@@ -34,7 +38,7 @@ gh_infos <- function(user) {
     user_views <- rbindlist(user_views)
     user_views[, date := as.Date(substr(timestamp, 1, 10))]
     setorder(user_views, repo, date)
-    user_views <- user_views[CJ(repo = unique(repo), date = unique(date)), on = c("repo", "date")]
+    user_views <- user_views[CJ(repo = user_repo$name, date = unique(date)), on = c("repo", "date")]
     user_views[is.na(count), count := 0]
     user_views <- user_views[, list(repo, date, count)]
   }
