@@ -1,4 +1,10 @@
 
+.shiny-output-error-no-pat {
+  text-align: center;
+  line-height: 500px;
+  background: #FFF;
+}
+
 .titre {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size:28px;

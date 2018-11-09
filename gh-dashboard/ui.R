@@ -99,16 +99,6 @@ fluidPage(
             width = "100%"
           )
         )
-        # column(
-        #   width = 1,
-        #   tags$div(
-        #     style = "margin-top: 25px;",
-        #     actionButton(
-        #       inputId = "refresh", label = NULL, icon = icon("refresh"),
-        #       style = "height: 34px; padding: 0px 12px;"
-        #     )
-        #   )
-        # ),
         
       ),
       

@@ -97,7 +97,7 @@ function(input, output, session) {
     validate(need(
       nrow(gh_datas$views) > 0,
       "You must register a GitHub PAT to see this chart, and this work only for your own username."
-    ))
+    ), errorClass = "no-pat")
     data_views <- gh_datas$views
     ggplot(data = tail(data_views, 20*15)) +
       aes(x = date, y = repo, size = count, color = count) +
