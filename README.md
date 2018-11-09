@@ -63,3 +63,24 @@ Launch application :
 shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "ratp_traffic")
 ```
 ![](ratp_traffic/www/screenshot_app.png)
+
+
+
+## GitHub dashboard
+
+Quick dashboard of a GitHub user/organization.
+
+**Packages** : The application use the following packages : 
+[`shiny`](https://shiny.rstudio.com/), [`shinyWidgets`](https://github.com/dreamRs/shinyWidgets), [`ggplot2`](https://github.com/tidyverse/ggplot2),
+[`gh`](https://github.com/r-lib/gh).
+
+
+Launch application : 
+
+```r
+shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "gh-dashboard")
+```
+![](gh-dashboard/www/screenshot.png)
+
+
+
