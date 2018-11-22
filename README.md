@@ -70,6 +70,8 @@ shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "ratp_traffic")
 
 Quick dashboard of a GitHub user/organization.
 
+:warning: It is recommended to have a registered GitHub token / PAT (see `?gh::gh_whoami`)
+
 **Packages** : The application use the following packages : 
 [`shiny`](https://shiny.rstudio.com/), [`shinyWidgets`](https://github.com/dreamRs/shinyWidgets), [`ggplot2`](https://github.com/tidyverse/ggplot2),
 [`gh`](https://github.com/r-lib/gh).

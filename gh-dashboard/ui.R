@@ -65,7 +65,7 @@ fluidPage(
               render = I("{
                  option: function(item, escape) {
                  return '<div>' +
-                 '<strong><img src=\"' + item.avatar_url + '\" width=50 />&nbsp;' + escape(item.login) + '</strong>:' +
+                 '<strong><img src=\"' + item.avatar_url + '\" width=50 />&nbsp;' + escape(item.login) + '</strong>' +
                  '</div>';
                  }
                  }"),
