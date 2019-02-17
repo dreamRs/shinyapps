@@ -2,6 +2,8 @@
 
 > Some Shiny applications
 
+All these applications are available on our Shiny server : http://shinyapps.dreamrs.fr/
+
 
 ## C'est la rentrée !
 
