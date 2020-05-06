@@ -1,0 +1,83 @@
+
+/* Styles for metro map app */
+
+.map-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.controls-pane {
+  border-radius: 5px;
+  border: 1px solid #112446;
+  background-color: #FFF;
+  padding: 5px;
+}
+
+
+/* Custom styles */
+
+.dropdown-menu {
+  z-index: 100000000000 !important;
+}
+
+h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navbar-header {
+  margin-left: 8.33% !important;
+}
+
+.bg-navy {
+  background-color: #18bc9c !important;
+}
+
+.small-box .icon-large {
+  color: #FFFFFF78 !important;
+}
+
+.box.box-primary {
+    border-top-color: #18bc9c !important;
+}
+
+.box.box-solid.box-primary {
+  border: 1px solid #18bc9c !important;
+}
+
+.box.box-solid.box-primary>.box-header {
+  color: #fff; 
+  background: #18bc9c !important; 
+  background-color: #18bc9c !important;
+}
+
+.nav-tabs-custom>.nav-tabs>li.active {
+  border-top-color: #18bc9c !important;
+}
+
+.box.box-solid.box-success>.box-header {
+    color: #fff;
+    background: #18bc9c !important;
+    background-color: #18bc9c !important;
+}
+
+
+.checkbox-bs-success input[type="checkbox"]:checked + label::before, .checkbox-bs-success input[type="radio"]:checked + label::before {
+    background-color: #18bc9c !important;
+    border-color: #18bc9c !important;
+}
+
+
+.dreamrs {
+  background-image:url(logo_dreamRs_couleur.png);
+  background-repeat:no-repeat;
+  background-position:right bottom;
+  background-size: 156px 100px;
+}
+
