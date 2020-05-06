@@ -62,7 +62,7 @@ Also, discover the different characteristics of each line.
 Launch application : 
 
 ```r
-shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "ratp_traffic")
+shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "ratp-traffic")
 ```
 ![](ratp_traffic/www/screenshot_app.png)
 
