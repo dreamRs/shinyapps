@@ -89,5 +89,5 @@ graph_profil_hor <- function(data,
     ) %>% 
     bb_legend(show = FALSE) %>% 
     bb_labs(title = title) %>% 
-    bb_add_style(".bb-tooltip-container" = "right: 10px; border: 1px solid #18bc9c; border-radius: 5px; padding: 4px;")
+    bb_add_style(".bb-tooltip-container" = "right: 10px; border: 1px solid #0073b7; border-radius: 5px; padding: 4px;")
 }

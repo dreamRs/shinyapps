@@ -2,7 +2,7 @@
 #  ------------------------------------------------------------------------
 #
 # Title : RATP validations - Server
-#    By : Philippine
+#    By : Philippine (adapted by D .Granjon)
 #  Date : 2018-08-07
 #    
 #  ------------------------------------------------------------------------
@@ -63,6 +63,7 @@ function(input, output) {
       filter(NB_VALD_STAT_CATJ_2017 == max(NB_VALD_STAT_CATJ_2017)) %>% 
       pull(NOM_ARRET) %>% 
       str_to_title %>% 
+      tags$h4(style = "font-weight: bold;") %>% 
       bs4ValueBox(
         subtitle = "station la plus fr\u00e9quent\u00e9e",
         icon = "map-marker",
@@ -87,7 +88,7 @@ function(input, output) {
                         scientific = FALSE)
     }
     bs4ValueBox(
-      value = titre,
+      value = tags$h4(titre, style = "font-weight: bold;"),
       subtitle = " validations",
       icon = "ticket-alt", 
       status = "primary", 
@@ -109,7 +110,7 @@ function(input, output) {
                       scientific = FALSE)
     }
     bs4ValueBox(
-      value = titre,
+      value = tags$h4(titre, style = "font-weight: bold;"),
       subtitle = " validations en moyenne /jour sur une station", 
       icon = "sun-o", 
       status = "primary", 
@@ -129,12 +130,13 @@ function(input, output) {
                       big.mark = " ", 
                       scientific = FALSE)
     }
-    titre %>% 
-      bs4ValueBox(
-        subtitle = " validations en moyenne /min sur une station : ", 
-        icon = "clock-o", 
-        status = "primary", 
-        width = 3)
+    bs4ValueBox(
+      value = tags$h4(titre, style = "font-weight: bold;"),
+      subtitle = " validations en moyenne /min sur une station : ", 
+      icon = "clock-o", 
+      status = "primary", 
+      width = 3
+    )
   })
   
   

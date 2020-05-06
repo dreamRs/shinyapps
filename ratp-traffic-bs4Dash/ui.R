@@ -2,10 +2,11 @@
 #  ------------------------------------------------------------------------
 #
 # Title : RATP validations - UI
-#    By : Philippine
+#    By : Philippine (adapted by D .Granjon)
 #  Date : 2018-08-07
 #    
 #  ------------------------------------------------------------------------
+
 bs4DashPage(
   navbar = bs4DashNavbar(
     tagList(
@@ -40,7 +41,7 @@ bs4DashPage(
   sidebar = bs4DashSidebar(
     skin = "light",
     status = "primary",
-    title = HTML("<small>Le M\u00e9tro parisien en 2017</small>"),
+    title = tags$small("Le M\u00e9tro parisien en 2017"),
     src = "https://upload.wikimedia.org/wikipedia/commons/0/01/RATP.svg",
     elevation = 3,
     opacity = 0.8,
@@ -90,7 +91,7 @@ bs4DashPage(
           )
         ),
         useShinyjs(),
-        br(), br(), br(),
+        # br(), br(), br(),
         fluidRow(
           column(
             width = 12, 
@@ -119,7 +120,7 @@ bs4DashPage(
                   collapsible = FALSE,
                   elevation = 4,
                   width = NULL,
-                  leafletOutput("carte", height = 410)
+                  leafletOutput("carte", height = 450)
                 )
               ),
               column(

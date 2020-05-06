@@ -5,6 +5,7 @@
 All these applications are available on our Shiny server : http://shinyapps.dreamrs.fr/
 
 
+
 ## C'est la rentrée !
 
 An application to explore the name of public schools in France. The names are represented by the gender, activity, and century of the personality by which establishments were named. More frequent names can be visualized, and you can access to the biography of a personality. All application is in French.
@@ -22,8 +23,9 @@ shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "rentree_scolaire")
 ![](rentree_scolaire/www/screenshot.png)
 
 
-## Electricity dashboard
 
+
+## Electricity dashboard
 
 Explore power consumption, production and exchanges in France via RTE's API.
 
@@ -38,8 +40,10 @@ shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "dashboard_elec")
 ```
 ![](dashboard_elec/www/screenshot1.png)
 
-## RATP Traffic
 
+
+
+## RATP Traffic
 
 Explore Paris metro traffic ; how it can vary according to the type of day or according to the line or the station.
 Also, discover the different characteristics of each line.
@@ -55,7 +59,7 @@ Also, discover the different characteristics of each line.
 
 
 
-**Data sources** : The data is recovered via the STIF Open data website : ("https://opendata.stif.info/")
+**Data sources** : The data is recovered via the STIF Open data website : https://opendata.stif.info/
 
 
 
@@ -64,7 +68,24 @@ Launch application :
 ```r
 shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "ratp-traffic")
 ```
-![](ratp_traffic/www/screenshot_app.png)
+
+![](ratp-traffic/www/screenshot_app.png)
+
+
+
+
+## RATP Traffic (bs4Dash)
+
+The same application as above but using [{bs4Dash}](https://github.com/RinteRface/bs4Dash) framework by @DivadNojnarg, to give it a modern look!
+
+Launch application : 
+
+```r
+shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "ratp-traffic-bs4Dash")
+```
+
+![](ratp-traffic-bs4Dash/www/screenshot_app.png)
+
 
 
 
