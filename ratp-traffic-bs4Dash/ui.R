@@ -42,7 +42,7 @@ bs4DashPage(
     skin = "light",
     status = "primary",
     title = tags$small("Le M\u00e9tro parisien en 2017"),
-    src = "https://upload.wikimedia.org/wikipedia/commons/0/01/RATP.svg",
+    src = "RATP.svg",
     elevation = 3,
     opacity = 0.8,
     bs4SidebarMenu(
