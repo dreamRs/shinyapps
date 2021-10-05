@@ -36,7 +36,7 @@ Explore power consumption, production and exchanges in France via RTE's API.
 Launch application : 
 
 ```r
-shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "dashboard_elec")
+shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "elec-dashboard")
 ```
 ![](dashboard_elec/www/screenshot1.png)
 
