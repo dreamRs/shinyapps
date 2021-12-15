@@ -38,7 +38,7 @@ Launch application :
 ```r
 shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "elec-dashboard")
 ```
-![](dashboard_elec/www/screenshot1.png)
+![](elec-dashboard/www/screenshot1.png)
 
 
 
