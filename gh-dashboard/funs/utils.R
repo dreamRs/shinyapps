@@ -10,6 +10,8 @@ gh_infos <- function(user) {
   
   # repo infos
   user_repo <- gh("/users/:user/repos", user = user, .limit = Inf)
+  if (length(user_repo) < 1)
+    return(NULL)
   if (length(user_repo) == 1 && user_repo == "")
     return(NULL)
   user_repo <- lapply(user_repo, `[`, c("name", "stargazers_count", "forks", "open_issues", "watchers"))

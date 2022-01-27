@@ -3,29 +3,17 @@
 #
 # Title : GitHub dashboard - UI
 #    By : dreamRs
-#  Date : 2018-10-30
+#  Date : 2018-10-30 (update: 2022-01-27)
 #
 #  ------------------------------------------------------------------------
-
-
-library("shiny")
-library("shinyWidgets")
-library("shinydashboard")
-library("shinyjs")
 
 
 fluidPage(
   
   tags$head(
-    tags$link(href="styles.css", rel="stylesheet", type="text/css"),
-    # Bindings shiny
-    tags$script(src = "odo.js"), 
-    # Odometer
-    tags$link(rel="stylesheet", href = "odometer-theme-minimal.min.css"),
-    tags$script(src = "odometer.min.js")
+    tags$link(href="styles.css", rel="stylesheet", type="text/css")
   ),
   
-  useShinydashboard(),
   useShinyjs(),
   
   fluidRow(
@@ -40,7 +28,7 @@ fluidPage(
         tags$h2("Retrieve information about a GitHub user/organisation via the GitHub API", class = "soustitre"),
         tags$br(),
         
-        tags$span(icon("github"), class = "main-icon")
+        tags$span(ph("github-logo"), class = "main-icon")
       ),
       
       fluidRow(
@@ -94,18 +82,16 @@ fluidPage(
             inputId = "gh_user2", 
             label = "Or enter directly a username:", 
             value = "dreamRs", 
-            btnSearch = icon("search"),
-            btnReset = icon("remove"),
+            btnSearch = ph("magnifying-glass"),
+            btnReset = ph("x"),
             width = "100%"
           )
         )
-        
       ),
-      
       tags$div(
         id = "alert-gh-user", style = "display: none;",
         class = "alert alert-danger",
-        tags$b(icon("danger"), "Error:", "username doesn't seems to be a valid GitHub user/org.")
+        tags$b(ph("warning"), "Error:", "username doesn't seems to be a valid GitHub user/org.")
       ),
       
       fluidRow(
@@ -113,29 +99,43 @@ fluidPage(
           width = 3,
           uiOutput(outputId = "user_avatar", style = "display: table;")
         ),
-        valueBox(
-          subtitle = "Total stars",
-          value = tags$span(0, class = "odometer", id = "n_stars", style = "color: #FFF;"),
-          icon = icon("star", class = "icon-white"),
-          color = "navy", 
-          width = 3
+        column(
+          width = 3,
+          statiCard(
+            value = 0,
+            subtitle = tags$b("Total stars"), 
+            background = "#112446", 
+            color = "#FFF",
+            animate = TRUE, 
+            icon = ph_i("star", weight = "regular"), 
+            id = "n_stars"
+          )
         ),
-        valueBox(
-          subtitle = "Open issues",
-          value = tags$span(0, class = "odometer", id = "n_issues", style = "color: #FFF;"),
-          icon = icon("exclamation-circle", class = "icon-white"),
-          color = "navy",
-          width = 3
+        column(
+          width = 3,
+          statiCard(
+            value = 0,
+            subtitle = tags$b("Open issues"), 
+            background = "#112446", 
+            color = "#FFF",
+            animate = TRUE, 
+            icon = ph_i("warning-circle", weight = "regular"), 
+            id = "n_issues"
+          )
         ),
-        valueBox(
-          subtitle = "Number of repos",
-          value = tags$span(0, class = "odometer", id = "n_repos", style = "color: #FFF;"),
-          icon = icon("book", class = "icon-white"),
-          color = "navy",
-          width = 3
+        column(
+          width = 3,
+          statiCard(
+            value = 0,
+            subtitle = tags$b("Number of repos"), 
+            background = "#112446", 
+            color = "#FFF",
+            animate = TRUE, 
+            icon = ph_i("book", weight = "regular"), 
+            id = "n_repos"
+          )
         )
       ),
-      
       fluidRow(
         column(
           width = 6,
@@ -151,9 +151,6 @@ fluidPage(
         )
       ),
       br()
-      
     )
-    
   )
-  
 )

@@ -3,15 +3,9 @@
 #
 # Title : GitHub dashboard - Server
 #    By : dreamRs
-#  Date : 2018-10-30
+#  Date : 2018-10-30 (update: 2022-01-27)
 #
 #  ------------------------------------------------------------------------
-
-
-library("shiny")
-library("shinyWidgets")
-library("shinydashboard")
-library("shinyjs")
 
 
 function(input, output, session) {
@@ -41,7 +35,7 @@ function(input, output, session) {
   observeEvent(gh_user$x, {
     req(gh_user$x)
     user_data <- try(gh("/users/:username", username = gh_user$x), silent = TRUE)
-    if (is.null(user_data) | "try-error" %in% class(user_data)) {
+    if (is.null(user_data) | inherits(user_data, "try-error")) {
       show(id = "alert-gh-user")
       gh_datas$infos <- NULL
       gh_datas$views <- NULL
@@ -57,9 +51,9 @@ function(input, output, session) {
       n_issues <- sum(gh_datas$infos$open_issues)
       n_repos <- nrow(gh_datas$infos)
     }
-    session$sendCustomMessage("odo", list(id = "n_stars", val = n_stars))
-    session$sendCustomMessage("odo", list(id = "n_issues", val = n_issues))
-    session$sendCustomMessage("odo", list(id = "n_repos", val = n_repos))
+    updateStatiCard(id = "n_stars", value = format(n_stars, width = 9))
+    updateStatiCard(id = "n_issues", value = n_issues)
+    updateStatiCard(id = "n_repos", value = n_repos)
   })
   
   output$user_avatar <- renderUI({
@@ -69,8 +63,8 @@ function(input, output, session) {
       tags$div(
         style = "display: table-cell; vertical-align: middle; padding-left: 20px;",
         tags$span(gh_datas$user$bio), tags$br(),
-        tags$a(href = gh_datas$user$blog, icon("link"), gh_datas$user$blog), tags$br(),
-        tags$a(href = gh_datas$user$html_url, icon("github"), gh_datas$user$html_url)
+        tags$a(href = gh_datas$user$blog, ph("link"), gh_datas$user$blog), tags$br(),
+        tags$a(href = gh_datas$user$html_url, ph("git-branch"), gh_datas$user$html_url)
       )
     )
   })
@@ -83,7 +77,7 @@ function(input, output, session) {
       geom_col(fill = "#112446") + 
       geom_text(hjust = -0.25, family = "serif", size = 4) + 
       coord_flip() +
-      scale_y_continuous(expand = expand_scale(c(0, 0.1))) +
+      scale_y_continuous(expand = expansion(c(0, 0.1))) +
       labs(
         title = "Number of stargazers by repo",
         x = NULL, y = "Number of stars"
@@ -104,7 +98,7 @@ function(input, output, session) {
       scale_size_continuous(range = c(0, 15)) +
       scale_x_date(date_breaks = "2 days") +
       scale_color_gradient(low = "#112446") + 
-      scale_y_discrete(expand = expand_scale(c(0.06, 0.06))) +
+      scale_y_discrete(expand = expansion(c(0.06, 0.06))) +
       guides(color = guide_legend(title = "Views"), size = guide_legend(title = "Views")) +
       geom_point() +
       theme_minimal() + 

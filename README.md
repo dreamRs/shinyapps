@@ -105,7 +105,7 @@ Launch application :
 ```r
 shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "gh-dashboard")
 ```
-![](gh-dashboard/www/screenshot.png)
+![](gh-dashboard/screenshot.png)
 
 
 
