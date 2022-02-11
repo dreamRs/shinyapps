@@ -108,4 +108,29 @@ shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "gh-dashboard")
 ![](gh-dashboard/screenshot.png)
 
 
+## Les naissances en France
+
+Explore births in France ; how it can vary according to each region or according to each department.
+Also, discover the number of births and the birth rate between 1975 and 2020.
+
+**Packages** : The application use the following packages : 
+[`shiny`](https://shiny.rstudio.com/), [`shinyWidgets`](https://github.com/dreamRs/shinyWidgets), 
+[`dplyr`]("https://github.com/tidyverse/dplyr"),
+[`leaflet`](https://rstudio.github.io/leaflet/),
+[`apexcharter`](https://dreamrs.github.io/apexcharter/),
+[`toastui`](https://github.com/dreamRs/toastui),
+[`bslib`](https://rstudio.github.io/bslib/)
+
+
+**Data sources** : The data is recovered via the French government Open data website : https://www.data.gouv.fr/fr/
+
+
+
+Launch application : 
+
+```r
+shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "tdb-naissances")
+```
+![](tdb-naissances/screenshot_app_naissances.png)
+
 

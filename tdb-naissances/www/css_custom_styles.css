@@ -1,0 +1,14 @@
+/* Custom CSS styles */
+
+.well {
+  height: fit-content !important;
+}
+
+.nav.nav-stacked {
+  height: auto !important;
+}
+
+.container-fluid {
+  max-width: 1600px;
+  margin: auto;
+}
