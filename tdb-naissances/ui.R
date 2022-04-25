@@ -9,17 +9,16 @@
 
 fluidPage(
   
-# Thème bslib
+  # Thème bslib
   theme = bs_theme (
     version = 5,
     bg = "#FFFFFF",
     fg = "#112446",
     primary = "#112446",
     "well-bg" = "#FFF",
-    base_font = font_google("Poppins"),
-    code_font = font_google("Poppins")
+    base_font = font_google("Poppins")
   ),
-
+  
   h1("Les naissances en France", align = "center"),
   
   tags$head(
@@ -52,7 +51,7 @@ fluidPage(
               justified = TRUE
             )
           ), 
-        
+          
           column(
             width = 3,
             
@@ -69,7 +68,7 @@ fluidPage(
         )
       )
     ), 
-
+    
     
     ########## Première page : GENERAL ##########
     
@@ -86,20 +85,20 @@ fluidPage(
             color = "#112446",
             animate = TRUE,
             id = "card_n_naissances"
-            )
-          ),
+          )
+        ),
         
         column(
-         width = 4,
-         statiCard(
+          width = 4,
+          statiCard(
             value = 0,
             subtitle = "Taux de natalité en 2020",
             icon = icon("chart-line"),
             color = "#112446",
             animate = TRUE,
             id = "card_natalite"
-           )
-          ),
+          )
+        ),
         column(
           width = 4,
           statiCard(
@@ -109,9 +108,9 @@ fluidPage(
             color = "#112446",
             animate = TRUE,
             id = "card_pic"
-           )
           )
-        ),
+        )
+      ),
       
       fluidRow(
         
@@ -122,11 +121,11 @@ fluidPage(
         column(
           width = 6,
           apexchartOutput(outputId = "taux_natalite")
-          )
         )
-      ),
-
-       
+      )
+    ),
+    
+    
     ########## Deuxième page : CARTE ##########
     
     tabPanel(
@@ -142,8 +141,8 @@ fluidPage(
             choices = list("Région" = "region", "Département" = "departement"),
             selected = "region",
             justified = TRUE
-            )
-          ),
+          )
+        ),
         
         column(
           width = 3,
@@ -155,25 +154,24 @@ fluidPage(
               "Taux de natalité",
               "Âge moyen de la mère"),
             selected = "Nombre de naissances"
-            )
           )
-        ), 
-     
+        )
+      ), 
+      
       br(),
       
       leafletOutput(outputId = "carte", width = "100%", height = 600)    
-
+      
     ),
     
     ########## Troisième page : DATA ##########
     
     tabPanel(
       title = "Data",
-      downloadButton(outputId = "export_data", label = "Exporter", class = NULL),
-      br(),
-      datagridOutput(outputId = "tableau_data")
-      )
+      downloadButton(outputId = "export_data", label = "Exporter", class = "mb-3"),
+      reactableOutput(outputId = "tableau_data")
     )
   )
+)
 
 

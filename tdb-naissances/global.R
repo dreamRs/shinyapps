@@ -15,7 +15,7 @@ library(shinyWidgets)
 library(dplyr)
 library(apexcharter)
 library(leaflet)
-library(toastui)
+library(reactable)
 library(bslib)
 library(sf)
 
