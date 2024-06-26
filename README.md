@@ -160,6 +160,6 @@ Launch application :
 shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "olympic-medals")
 ```
 
-![](olympic-games/screenshot.png)
+![](olympic-medals/screenshot.png)
 
 
