@@ -132,5 +132,34 @@ Launch application :
 shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "tdb-naissances")
 ```
 ![](tdb-naissances/screenshot_app_naissances.png)
+## Summer Olympic Games medals
+
+Explore the countries that have won the most medals for all the modern summer olympic games, between 1896 and 2020. The medal type (gold, silver, bronze) distribution for each **country**, **slug game edition** and **discipline**.
+
+**Packages** : The application uses the following packages : 
+[`shiny`](https://shiny.rstudio.com/),
+[`shinyWidgets`](https://github.com/dreamRs/shinyWidgets), 
+[`shinydashboard`](https://github.com/dreamRs/shinydashboard), 
+[`dplyr`]("https://github.com/tidyverse/dplyr"),
+[`ggplot2`]("https://github.com/tidyverse/ggplot2"),
+[`ggthemes`]("https://cran.r-project.org/package=ggthemes"),
+[`bslib`](https://rstudio.github.io/bslib/)
+[`data.table`](https://github.com/Rdatatable/data.table)
+[`reactable`](https://cran.r-project.org/package=reactable)
+[`tidyr`](https://rstudio.github.io/tidyr/)
+[`ggtext`](https://cran.r-project.org/package=ggtext)
+
+
+**Data sources** : The data is recovered via Kaggle at:
+[](https://www.kaggle.com/datasets/piterfm/olympic-games-medals-19862018)
+
+
+Launch application : 
+
+```r
+shiny::runGitHub(repo = "dreamRs/shinyapps", subdir = "olympic-medals")
+```
+
+![](olympic-medals/screenshot.png)
 
 
