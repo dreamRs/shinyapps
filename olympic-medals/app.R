@@ -14,18 +14,18 @@ source("R/visualisation.R")
 
 medals_summer <- readRDS(file = "datas/medals_summer.rds")
 
-custom_theme <- bs_theme(
-  version = 5,
-  bg = "#FFFFFF",
-  fg = "#000000",
-  primary = "#E3E3E3",
-  secondary = "#000000",
-  base_font = "Maven Pro"
-)
 
 ui <- fluidPage(
   title = "R-Olympics",
-  theme = custom_theme,
+  theme = bs_theme(
+    version = 5,
+    preset = "bootstrap",
+    bg = "#FFFFFF",
+    fg = "#000000",
+    primary = "#E3E3E3",
+    secondary = "#000000",
+    base_font = "Maven Pro"
+  ),
   tags$head(
     tags$link(
       rel = "icon", type = "image/png", sizes = "32x32",
@@ -47,15 +47,12 @@ ui <- fluidPage(
             width = 200,
             height = 100
           ),
-          tags$h2("An overview of olympic medals",
-            align = "center"
-          ),
-          style = "text-align: center;"
+          tags$h2("An overview of olympic medals"),
+          class = "text-center"
         ),
         fluidRow(
           column(
             width = 5,
-            offset = 0,
             virtualSelectInput(
               inputId = "discipline",
               label = "Select discipline:",
@@ -67,7 +64,6 @@ ui <- fluidPage(
           ),
           column(
             width = 5,
-            offset = 0,
             virtualSelectInput(
               inputId = "summer_og",
               label = "Select game edition:",
@@ -79,40 +75,47 @@ ui <- fluidPage(
           ),
           column(
             width = 2,
-            offset = 0,
-            dropMenu(
-              actionButton("btn",
-                "Settings",
-                style = "color: black; background-color: white; border-color: black",
-                class = "btn-outline-primary mt-4",
-                icon = icon("medal"),
-                width = "100%"
+            tags$div(
+              class = "shiny-input-container",
+              tags$label(
+                class = "control-label invisible",
+                "Settings"
               ),
-              checkboxGroupButtons(
-                inputId = "medal_type",
-                label = "Select medal type:",
-                choiceValues = unique(medals_summer$medal_type),
-                direction = "vertical",
-                choiceNames = list(
-                  tags$span(icon("medal"), "GOLD", style = "color: #9F8F5E;"),
-                  tags$span(icon("medal"), "SILVER", style = "color: #969696"),
-                  tags$span(icon("medal"), "BRONZE", style = "color: #996B4F")
+              dropMenu(
+                actionButton(
+                  inputId = "btn",
+                  label = "Settings",
+                  style = "color: black; background-color: white; border-color: black",
+                  class = "btn-outline-primary",
+                  icon = icon("medal"),
+                  width = "100%"
                 ),
-                selected = unique(medals_summer$medal_type),
-                width = "100%",
-                status = "outline-primary"
-              ),
-              numericInput(
-                inputId = "top",
-                label = "Number of countries displayed:",
-                value = 10,
-                min = 1,
-                max = length(unique(medals_summer$country_name)),
-                width = "100%"
-              ),
-              placement = "bottom-start",
-              theme = "light",
-              padding = "0px"
+                checkboxGroupButtons(
+                  inputId = "medal_type",
+                  label = "Select medal type:",
+                  choiceValues = unique(medals_summer$medal_type),
+                  direction = "vertical",
+                  choiceNames = list(
+                    tags$span(icon("medal"), "GOLD", style = "color: #9F8F5E;"),
+                    tags$span(icon("medal"), "SILVER", style = "color: #969696"),
+                    tags$span(icon("medal"), "BRONZE", style = "color: #996B4F")
+                  ),
+                  selected = unique(medals_summer$medal_type),
+                  width = "100%",
+                  status = "outline-primary"
+                ),
+                numericInput(
+                  inputId = "top",
+                  label = "Number of countries displayed:",
+                  value = 10,
+                  min = 1,
+                  max = length(unique(medals_summer$country_name)),
+                  width = "100%"
+                ),
+                placement = "bottom-start",
+                theme = "light",
+                padding = "0px"
+              )
             )
           )
         ),
