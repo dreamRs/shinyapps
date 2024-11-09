@@ -81,3 +81,15 @@ h3 {
   background-size: 156px 100px;
 }
 
+
+/* Dark mode fixes */
+.dark-mode .bb-title {
+  stroke: #fff;
+  font-weight: normal;
+}
+
+.dark-mode .bb line, 
+.dark-mode .bb path, 
+.dark-mode text tspan {
+  stroke: #fff;
+}

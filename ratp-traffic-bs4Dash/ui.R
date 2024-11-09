@@ -4,25 +4,33 @@
 # Title : RATP validations - UI
 #    By : Philippine (adapted by D .Granjon)
 #  Date : 2018-08-07
-#    
+#
 #  ------------------------------------------------------------------------
 
-bs4DashPage(
-  navbar = bs4DashNavbar(
+dashboardPage(
+  header = dashboardHeader(
+    title = dashboardBrand(
+      color = "primary",
+      title = tags$small("Le M\u00e9tro parisien en 2017"),
+      image = "RATP.svg",
+      opacity = .8
+    ),
     tagList(
       pickerInput(
-        inputId = "choix_ligne", 
-        width = NULL, 
+        inputId = "choix_ligne",
+        width = NULL,
         options = list(style = "btn-primary"),
         multiple = FALSE,
-        choices = c("ALL",levels(lignes_metro$LIGNE)),
+        choices = c("ALL", levels(lignes_metro$LIGNE)),
         choicesOpt = list(
           content = c(
-            sprintf("<img src=\'logo_blanc_ratp.png\' width=20 style=\'vertical-align:top;\'></img> - Choisissez une ligne : "), 
-            sprintf("<img src=\'Paris_m_%s_jms.svg\' width=20 style=\'vertical-align:top;\'></img> Ligne %s",
-                    metrolines, metrolines)
+            sprintf("<img src=\'logo_blanc_ratp.png\' width=20 style=\'vertical-align:top;\'></img> - Choisissez une ligne : "),
+            sprintf(
+              "<img src=\'Paris_m_%s_jms.svg\' width=20 style=\'vertical-align:top;\'></img> Ligne %s",
+              metrolines, metrolines
+            )
           )
-        ), 
+        ),
         selected = "Choisissez une ligne"
       ),
       tags$div(
@@ -30,7 +38,7 @@ bs4DashPage(
         checkboxGroupInput(
           inputId = "type_jour",
           label = NULL,
-          width = NULL, 
+          width = NULL,
           choices = list("Vacances" = "vacances", "Week-end" = "weekend", "Jour ouvr\u00e9" = "Jour ouvre"),
           selected = c("Jour ouvre", "weekend", "vacances"),
           inline = TRUE
@@ -38,63 +46,76 @@ bs4DashPage(
       )
     )
   ),
-  sidebar = bs4DashSidebar(
+  sidebar = dashboardSidebar(
     skin = "light",
-    status = "primary",
-    title = tags$small("Le M\u00e9tro parisien en 2017"),
-    src = "RATP.svg",
-    elevation = 3,
-    opacity = 0.8,
-    bs4SidebarMenu(
-      bs4SidebarMenuItem(
+    sidebarMenu(
+      menuItem(
         "Tableau de bord",
         tabName = "dashboard",
-        icon = "sliders"
+        icon = icon("sliders")
       ),
-      bs4SidebarMenuItem(
+      menuItem(
         "A propos de l\'application",
         tabName = "about",
-        icon = "info"
+        icon = icon("info")
       )
     )
   ),
-  controlbar = NULL,
-  footer = bs4DashFooter(
-    copyrights = tagList(
+  footer = dashboardFooter(
+    left = tagList(
       tags$a(
-        class = "btn btn-default", 
-        icon("twitter"), 
-        "@Philippine", 
-        href = "https://twitter.com/PhilippineRs", 
+        class = "btn btn-default",
+        icon("twitter"),
+        "@Philippine",
+        href = "https://twitter.com/PhilippineRs",
         style = "background-color: #1DA1F2; color: #FFF;"
       ),
       tags$a(
-        class = "btn btn-default", 
-        icon("twitter"), 
-        "@dreamRs", 
-        href = "https://twitter.com/dreamRs_fr", 
+        class = "btn btn-default",
+        icon("twitter"),
+        "@dreamRs",
+        href = "https://twitter.com/dreamRs_fr",
         style = "background-color: #1DA1F2; color: #FFF;"
       )
-    ), 
-    right_text = 2018
+    ),
+    right = "2018-2020"
   ),
-  title = "test",
-  body = bs4DashBody(
-    bs4TabItems(
-      bs4TabItem(
+  title = "RATP dashboard",
+  body = dashboardBody(
+    tabItems(
+      tabItem(
         tabName = "dashboard",
         tags$head(
           tags$link(
-            rel = "stylesheet", 
-            type = "text/css", 
+            rel = "stylesheet",
+            type = "text/css",
             href = "styles.css"
           )
         ),
         useShinyjs(),
+        # properly recize htmlWidget leaflet
+        tags$head(
+          tags$script(
+            "$(function() {
+              $('[data-card-widget=\"maximize\"]').on('click', function() {
+                setTimeout(function() {
+                  var isMaximized = $('html').hasClass('maximized-card');
+                  if (isMaximized) {
+                    $('#carte').css('height', '100%');
+                  } else {
+                    $('#carte').css('height', '400px');
+                  }
+                }, 300);
+                $('#carte').trigger('resize');
+              });
+            });
+            "
+          )
+        ),
         # br(), br(), br(),
         fluidRow(
           column(
-            width = 12, 
+            width = 12,
             fluidRow(
               column(
                 width = 12,
@@ -104,68 +125,72 @@ bs4DashPage(
                   align = "center",
                   fluidRow(
                     # Bouton type jour --------------------------------------------------------
-                    
                   )
                 )
               )
             ),
             fluidRow(
-              column( 
+              column(
                 width = 9,
                 # Carte des stations ------------------------------------------------------
-                bs4Card(
+                box(
                   title = "Paris - Carte Metro",
                   status = "primary",
-                  solidHeader = FALSE,
+                  solidHeader = TRUE,
                   collapsible = FALSE,
+                  maximizable = TRUE,
                   elevation = 4,
                   width = NULL,
-                  leafletOutput("carte", height = 450)
+                  leafletOutput("carte")
                 )
               ),
               column(
                 width = 3,
                 # valueBox1 ----------------------------------------------------------------
                 fluidRow(
-                  bs4ValueBoxOutput("bigger_station", width = 12)),
-                
+                  valueBoxOutput("bigger_station", width = 12)
+                ),
+
                 # valueBox2 ----------------------------------------------------------------
                 fluidRow(
-                  bs4ValueBoxOutput("n_validation", width = 12)),
-                
+                  valueBoxOutput("n_validation", width = 12)
+                ),
+
                 # valueBox3 ----------------------------------------------------------------
                 fluidRow(
-                  bs4ValueBoxOutput("indic_validation", width = 12)),
-                
+                  valueBoxOutput("indic_validation", width = 12)
+                ),
+
                 # valueBox4 ----------------------------------------------------------------
                 fluidRow(
-                  bs4ValueBoxOutput("indic_validation2", width = 12))
+                  valueBoxOutput("indic_validation2", width = 12)
+                )
               )
             ),
             fluidRow(
               # Box section info Lignes -------------------------------------------------
-              bs4Card(
+              box(
                 collapsible = FALSE,
-                solidHeader = TRUE,
+                solidHeader = FALSE,
                 title = "Informations Lignes : Le saviez-vous ? ",
                 status = "primary",
                 width = 4,
                 uiOutput(outputId = "info_ligne")
               ),
               # Box profil horaire ------------------------------------------------------------------
-              bs4Card(
+              box(
                 collapsible = FALSE,
-                solidHeader = TRUE,
+                solidHeader = FALSE,
                 title = "Profil de frequentation horaire ",
                 status = "primary",
                 width = 8,
                 prettyToggle(
-                  inputId = "type_valeur_horaire", 
-                  label_on = "Nb", 
+                  inputId = "type_valeur_horaire",
+                  label_on = "Nb",
                   label_off = "%",
-                  value = TRUE, 
-                  shape = "round", 
-                  outline = TRUE, 
+                  value = TRUE,
+                  shape = "round",
+                  outline = TRUE,
                   fill = TRUE
                 ),
                 fluidRow(
@@ -192,13 +217,13 @@ bs4DashPage(
         br(), br(),
         fluidRow(
           column(
-            width = 12, 
+            width = 12,
             align = "center",
-            bs4Card(
+            box(
               title = "About",
               status = "primary",
               collapsible = FALSE,
-              solidHeader = TRUE,
+              solidHeader = FALSE,
               width = 6,
               descriptif_application()
             )
